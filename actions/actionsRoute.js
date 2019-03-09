@@ -17,5 +17,20 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.post('/', async (req, res) => {
+    try {
+        const action = req.body;
+        const added = await actionDb.insert(action);
+        if (added) {
+            res.status(201).json(action);
+        }
+        else {
+            res.json('Please enter name, description, completed and notes.');
+        }
+    }
+    catch (e) {
+        res.status(500).json(e);
+    }
+});
 
 module.exports = router;
