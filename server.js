@@ -4,7 +4,7 @@ const server = express();
 server.use(express.json());
 
 const projectsRoutes = require('./projects/projectsRoute.js');
-// const actionsRoutes = require('./actions/actionsRoutes');
+const actionsRoutes = require('./actions/actionsRoute.js');
 
 
 server.get('/', (req, res) => {
@@ -12,7 +12,7 @@ server.get('/', (req, res) => {
 });
 
 server.use('/api/projects/', projectsRoutes);
-// server.use('/api/actions/', actionsRoutes);
+server.use('/api/actions/', actionsRoutes);
 
 
 module.exports = server;
