@@ -36,17 +36,17 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const id = req.params.id;
+
         const project = await projectDb.get(id);
-        console.log(project);
         if (project) {
             res.status(200).json(project);
         }
         else {
-            res.json('This project is not available.');
+            res.status(404).json('This project id is not available.');
         }
     }
     catch (e) {
-        res.status(500).json(e);
+        res.status(500).json('This project id is not available');
     }
 });
 
@@ -86,7 +86,6 @@ router.delete('/:id', async (req, res) => {
 router.get('/:id/actions', async (req, res) => {
     
     const id = req.params.id;
-    console.log(id);
     try {
         if (id) {
             const projectsActions = await projectDb.getProjectActions(id);
@@ -99,7 +98,7 @@ router.get('/:id/actions', async (req, res) => {
         }
     }
     catch (e) {
-        res.status(500).json(e);
+        res.status(500).json('This project id is not available');
     }
 })
 

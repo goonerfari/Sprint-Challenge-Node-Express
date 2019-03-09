@@ -35,18 +35,18 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const id = req.params.id;
-        const action = await actionDb.get(id);
+        const action = await actionDb.get(req.params.id);
         
         if (action) {
             res.status(200).json(action);
         }
         else {
-            res.json('This action id is not available.');
+            res.status(404).json('This action id is not available.');
         }
+        console.log(action);
     }
     catch (e) {
-        res.status(500).json(e);
+        res.status(500).json('This action id is not available');
     }
 });
 
@@ -59,7 +59,7 @@ router.put('/:id', async (req, res) => {
             res.status(201).json(updated);
         }
         else {
-            res.json('This action is not available.');
+            res.status(404).json('This action is not available.');
         }
     }
     catch (e) {
@@ -75,7 +75,7 @@ router.delete('/:id', async (req, res) => {
             res.status(200).json('Action was successfully deleted.');
         }
         else {
-            res.json('This action is not available.');
+            res.status(404).json('This action is not available.');
         }
     }
     catch (e) {
