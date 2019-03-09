@@ -34,14 +34,29 @@ router.post('/', async (req, res) => {
 });
 
 
-
 router.get('/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const action = await actionDb.get(id);
-        console.log(action);
+        
         if (action) {
             res.status(200).json(action);
+        }
+        else {
+            res.json('This action id is not available.');
+        }
+    }
+    catch (e) {
+        res.status(500).json(e);
+    }
+});
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deleted = await actionDb.remove(id);
+        if (deleted) {
+            res.status(200).json('Action was successfully deleted.');
         }
         else {
             res.json('This action is not available.');
