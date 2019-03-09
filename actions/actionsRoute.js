@@ -51,6 +51,24 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+
+router.put('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const action = req.body;
+        const updated = await actionDb.update(id, action);
+        if (updated) {
+            res.status(201).json(updated);
+        }
+        else {
+            res.json('This action is not available.');
+        }
+    }
+    catch (e) {
+        res.status(500).json(e);
+    }
+});
+
 router.delete('/:id', async (req, res) => {
     try {
         const id = req.params.id;
