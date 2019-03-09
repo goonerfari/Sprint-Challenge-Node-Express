@@ -49,4 +49,20 @@ router.put('/:id', async (req, res) => {
         res.status(500).json(e);
     }
 });
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deleted = await projectDb.remove(id);
+        if (deleted) {
+            res.status(201).json(deleted);
+        }
+        else {
+            res.json('Please enter name, description and completed');
+        }
+    }
+    catch (e) {
+        res.status(500).json(e);
+    }
+});
 module.exports = router;
