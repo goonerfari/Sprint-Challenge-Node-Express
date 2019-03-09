@@ -37,8 +37,9 @@ router.get('/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const project = await projectDb.get(id);
+        console.log(project);
         if (project) {
-            res.status(201).json(project);
+            res.status(200).json(project);
         }
         else {
             res.json('This project is not available.');
@@ -71,7 +72,7 @@ router.delete('/:id', async (req, res) => {
         const id = req.params.id;
         const deleted = await projectDb.remove(id);
         if (deleted) {
-            res.status(201).json('Project was removed successfully.');
+            res.status(201).json('Project was successfully removed.');
         }
         else {
             res.json('This project is not available.');
