@@ -5,7 +5,6 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const projects = await projectDb.get();
-        console.log('hello')
 
         if (projects) {
             res.status(200).json(projects);
@@ -18,4 +17,20 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.post('/', async (req, res) => {
+    console.log('hello');
+    try {
+        const project = req.body;
+        const added = await projectDb.insert(project);
+        if (added) {
+            res.status(201).json(project);
+        }
+        else {
+            res.json('Please enter title and body.');
+        }
+    }
+    catch (e) {
+        res.status(500).json(e);
+    }
+});
 module.exports = router;
