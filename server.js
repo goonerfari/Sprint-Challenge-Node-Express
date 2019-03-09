@@ -3,8 +3,8 @@ const server = express();
 
 server.use(express.json());
 
-const projectsRoutes = require('./projects/projectRoutes');
-const actionRoutes = require('./actions/actionRoutes');
+const projectsRoutes = require('./projects/projectsRoute.js');
+// const actionsRoutes = require('./actions/actionsRoutes');
 
 
 server.get('/', (req, res) => {
@@ -12,7 +12,7 @@ server.get('/', (req, res) => {
 });
 
 server.use('/api/projects/', projectsRoutes);
-server.use('/api/actions/', actionRoutes);
+// server.use('/api/actions/', actionsRoutes);
 
 
 module.exports = server;
