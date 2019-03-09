@@ -33,6 +33,22 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const project = await projectDb.get(id);
+        if (project) {
+            res.status(201).json(project);
+        }
+        else {
+            res.json('This project is not available.');
+        }
+    }
+    catch (e) {
+        res.status(500).json(e);
+    }
+});
+
 router.put('/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -42,7 +58,7 @@ router.put('/:id', async (req, res) => {
             res.status(201).json(updated);
         }
         else {
-            res.json('Please enter name, description and completed');
+            res.json('This project is not available.');
         }
     }
     catch (e) {
@@ -55,10 +71,10 @@ router.delete('/:id', async (req, res) => {
         const id = req.params.id;
         const deleted = await projectDb.remove(id);
         if (deleted) {
-            res.status(201).json(deleted);
+            res.status(201).json('Project was removed successfully.');
         }
         else {
-            res.json('Please enter name, description and completed');
+            res.json('This project is not available.');
         }
     }
     catch (e) {
