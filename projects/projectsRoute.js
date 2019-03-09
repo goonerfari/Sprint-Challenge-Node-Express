@@ -82,4 +82,25 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json(e);
     }
 });
+
+router.get('/:id/actions', async (req, res) => {
+    
+    const id = req.params.id;
+    console.log(id);
+    try {
+        if (id) {
+            const projectsActions = await projectDb.getProjectActions(id);
+            if (projectsActions) {
+                res.status(200).json(projectsActions);
+            }
+        }
+        else {
+            res.json('This project is unavailable')
+        }
+    }
+    catch (e) {
+        res.status(500).json(e);
+    }
+})
+
 module.exports = router;

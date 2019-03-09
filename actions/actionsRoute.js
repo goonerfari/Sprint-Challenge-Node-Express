@@ -33,7 +33,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-
 router.get('/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -50,7 +49,6 @@ router.get('/:id', async (req, res) => {
         res.status(500).json(e);
     }
 });
-
 
 router.put('/:id', async (req, res) => {
     try {
