@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
             res.status(404).json('Projects are not available.');
         }
     } catch (e) {
-        res.status(500).json(e)
+        res.status(500).json(e);
     }
 })
 
@@ -46,7 +46,7 @@ router.get('/:id', async (req, res) => {
         }
     }
     catch (e) {
-        res.status(500).json('This project id is not available');
+        res.status(500).json(e);
     }
 });
 
@@ -98,7 +98,7 @@ router.get('/:id/actions', async (req, res) => {
         }
     }
     catch (e) {
-        res.status(500).json('This project id is not available');
+        res.status(500).json(e);
     }
 })
 

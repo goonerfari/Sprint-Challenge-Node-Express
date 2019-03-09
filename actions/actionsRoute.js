@@ -43,10 +43,9 @@ router.get('/:id', async (req, res) => {
         else {
             res.status(404).json('This action id is not available.');
         }
-        console.log(action);
     }
     catch (e) {
-        res.status(500).json('This action id is not available');
+        res.status(500).json(e);
     }
 });
 
