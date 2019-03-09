@@ -18,7 +18,6 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    console.log('hello');
     try {
         const project = req.body;
         const added = await projectDb.insert(project);
@@ -26,7 +25,24 @@ router.post('/', async (req, res) => {
             res.status(201).json(project);
         }
         else {
-            res.json('Please enter title and body.');
+            res.json('Please enter name, description and completed.');
+        }
+    }
+    catch (e) {
+        res.status(500).json(e);
+    }
+});
+
+router.put('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const project = req.body;
+        const updated = await projectDb.update(id, project);
+        if (updated) {
+            res.status(201).json(updated);
+        }
+        else {
+            res.json('Please enter name, description and completed');
         }
     }
     catch (e) {
